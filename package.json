@@ -10,11 +10,10 @@
     "lint:eslint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
-    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
+    "lint:lint-staged": "lint-staged -c",
     "lint:pretty": "pretty-quick --staged",
     "test prod gzip": "http-server dist --cors --gzip -c-1",
-    "test prod cors": "http-server dist --cors --gzip -P http://29135jo738.zicp.vip",
-    "prepare": "husky install"
+    "test prod cors": "http-server dist --cors --gzip -P http://29135jo738.zicp.vip"
   },
   "dependencies": {
     "@vueuse/core": "^5.0.3",
@@ -56,7 +55,6 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.11.1",
     "gh-pages": "^3.2.0",
-    "husky": "^6.0.0",
     "less": "^4.1.1",
     "less-loader": "5.0.0",
     "lint-staged": "^11.0.0",
