@@ -1,3 +1,11 @@
+<!--
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-01 10:46:44
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-01 15:23:26
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/views/shared/dashboard/welcome/index.vue
+-->
 <template>
   <div>
     <div class="box">
@@ -21,7 +29,7 @@
 import { defineComponent, ref, watchEffect } from 'vue'
 import { Descriptions, Badge } from 'ant-design-vue'
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue'
-import HuaweiCharge from '@/components/lockscreen/huawei-charge.vue'
+// import HuaweiCharge from '@/components/lockscreen/huawei-charge.vue'
 import BrowserType from '@/utils/browser-type'
 import { useBattery } from '@/hooks/useBattery'
 import { useOnline } from '@/hooks/useOnline'
@@ -31,7 +39,7 @@ import { useStore } from '@/store'
 export default defineComponent({
   name: 'Welcome',
   components: {
-    HuaweiCharge,
+    // HuaweiCharge,
     [Badge.name]: Badge,
     [Descriptions.name]: Descriptions,
     [Descriptions.Item.name]: Descriptions.Item,

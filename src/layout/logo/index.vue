@@ -1,7 +1,15 @@
+<!--
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-01 10:46:44
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-01 11:42:29
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/layout/logo/index.vue
+-->
 <template>
   <div class="logo">
     <img src="~@/assets/images/logo.png" alt="" />
-    <h2 v-show="!collapsed" class="title">One Piece</h2>
+    <h2 v-show="!collapsed" class="title">JoyNop</h2>
   </div>
 </template>
 
