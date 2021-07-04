@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-01 10:46:44
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-01 15:23:26
+ * @LastEditTime: 2021-07-02 10:50:03
  * @Description: file content
  * @FilePath: /vue3-antd-admin/src/views/shared/dashboard/welcome/index.vue
 -->
@@ -34,7 +34,7 @@ import BrowserType from '@/utils/browser-type'
 import { useBattery } from '@/hooks/useBattery'
 import { useOnline } from '@/hooks/useOnline'
 import { useStore } from '@/store'
-// import performanceMonitor from '@/utils/performanceMonitor'
+import performanceMonitor from '@/utils/performanceMonitor'
 
 export default defineComponent({
   name: 'Welcome',
@@ -71,7 +71,10 @@ export default defineComponent({
       })
     })
 
-    // console.log(performanceMonitor.getPerformanceData(), 'performanceMonitor')
+    console.log(11)
+
+    console.log(performanceMonitor.getPerformanceData(), 'performanceMonitor')
+    console.log(22)
 
     return {
       userInfo,

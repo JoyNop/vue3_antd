@@ -186,7 +186,7 @@ const transform: AxiosTransform = {
         })
         return
       }
-    } catch (error:any) {
+    } catch (error: any) {
       throw new Error(error)
     }
     // 请求是否被取消

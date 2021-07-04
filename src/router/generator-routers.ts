@@ -1,4 +1,12 @@
-import { adminMenus } from '@/api/system/menu'
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-01 10:46:44
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-04 20:30:13
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/router/generator-routers.ts
+ */
+import { adminMenus, getMenu } from '@/api/system/menu'
 import { constantRouterComponents } from './constantRouterComponents'
 import router from '@/router/index'
 import { routes } from '@/router/index'
@@ -99,4 +107,31 @@ export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
         reject(err)
       })
   })
+}
+
+export const generatorDynamicRouter1 = () => {
+  const result = getMenu()
+
+  console.log('result', result)
+  const menuNav: any = []
+  const childrenNav = []
+  //      后端数据, 根级树数组,  根级 PID
+  // listToTree(data, childrenNav, 0)
+  // rootRouter.children = childrenNav
+  menuNav.push(childrenNav)
+  const routeList = list2tree(result)
+  console.log(routeList, '根据后端返回的权限路由生成')
+  routeList.forEach((item) => {
+    // 设置模块重定向到菜单
+    if (item.children?.length > 0 && !item.redirect) {
+      item.redirect = { name: item.children[0].name }
+    }
+  })
+  const layout = routes.find((item) => item.name == 'Layout')!
+  layout.children = [...common, ...routeList]
+  // const routes = [...common,...routeList]
+  // routes.forEach(item => router.addRoute('Layout', item))
+  router.addRoute(layout)
+
+  router.addRoute(notFound)
 }
