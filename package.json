@@ -12,6 +12,7 @@
     "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "lint:lint-staged": "lint-staged -c",
     "lint:pretty": "pretty-quick --staged",
+    "new": "plop",
     "test prod gzip": "http-server dist --cors --gzip -c-1",
     "test prod cors": "http-server dist --cors --gzip -P http://29135jo738.zicp.vip"
   },
@@ -25,6 +26,7 @@
     "mitt": "^2.1.0",
     "nprogress": "^1.0.0-1",
     "qs": "^6.10.1",
+    "three": "^0.130.0",
     "vue": "^3.1.1",
     "vue-router": "^4.0.8",
     "vuex": "^4.0.1"
@@ -59,6 +61,7 @@
     "less-loader": "5.0.0",
     "lint-staged": "^11.0.0",
     "lodash-webpack-plugin": "^0.11.6",
+    "plop": "^2.7.4",
     "prettier": "^2.3.1",
     "pretty-quick": "^3.1.0",
     "sass": "^1.32.13",

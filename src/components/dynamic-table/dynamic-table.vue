@@ -161,6 +161,8 @@ export default defineComponent({
     // 开启表格伸缩列
     props.dragColEnable && useDragCol(props.columns)
 
+    console.log(props, 100000000)
+
     const state = reactive({
       expandItemRefs: {},
       customRow: () => ({} as TableProps['customRow']),
