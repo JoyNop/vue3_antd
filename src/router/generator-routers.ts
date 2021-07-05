@@ -2,9 +2,9 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-01 10:46:44
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-04 20:30:13
+ * @LastEditTime: 2021-07-05 15:46:15
  * @Description: file content
- * @FilePath: /vue3-antd-admin/src/router/generator-routers.ts
+ * @FilePath: /vue3_antd/src/router/generator-routers.ts
  */
 import { adminMenus, getMenu } from '@/api/system/menu'
 import { constantRouterComponents } from './constantRouterComponents'
