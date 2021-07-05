@@ -1,12 +1,20 @@
+<!--
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-01 10:46:44
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-05 10:23:23
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/App.vue
+-->
 <template>
   <config-provider v-show="!isLock" :locale="zhCN">
     <router-view v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
   </config-provider>
-  <transition name="slide-up">
+  <!-- <transition name="slide-up">
     <lock-screen v-if="isLock && $route.name != 'login'" />
-  </transition>
+  </transition> -->
 </template>
 
 <script lang="ts">
@@ -26,34 +34,34 @@ export default defineComponent({
     const isLock = computed(() => store.state.lockscreen.isLock)
     const lockTime = computed(() => store.state.lockscreen.lockTime)
 
-    let timer
+    // let timer
 
-    const timekeeping = () => {
-      clearInterval(timer)
-      if (route.name == 'login' || isLock.value) return
-      // 设置不锁屏
-      store.commit('lockscreen/setLock', false)
-      // 重置锁屏时间
-      store.commit('lockscreen/setLockTime')
-      timer = setInterval(() => {
-        // 锁屏倒计时递减
-        store.commit('lockscreen/setLockTime', lockTime.value - 1)
-        if (lockTime.value <= 0) {
-          // 设置锁屏
-          store.commit('lockscreen/setLock', true)
-          return clearInterval(timer)
-        }
-        // console.log(lockTime.value, '锁屏倒计时')
-      }, 1000)
-    }
+    // const timekeeping = () => {
+    //   clearInterval(timer)
+    //   if (route.name == 'login' || isLock.value) return
+    //   // 设置不锁屏
+    //   store.commit('lockscreen/setLock', false)
+    //   // 重置锁屏时间
+    //   store.commit('lockscreen/setLockTime')
+    //   timer = setInterval(() => {
+    //     // 锁屏倒计时递减
+    //     store.commit('lockscreen/setLockTime', lockTime.value - 1)
+    //     if (lockTime.value <= 0) {
+    //       // 设置锁屏
+    //       store.commit('lockscreen/setLock', true)
+    //       return clearInterval(timer)
+    //     }
+    //     // console.log(lockTime.value, '锁屏倒计时')
+    //   }, 1000)
+    // }
 
-    onMounted(() => {
-      document.addEventListener('mousedown', timekeeping)
-    })
+    // onMounted(() => {
+    //   document.addEventListener('mousedown', timekeeping)
+    // })
 
-    onUnmounted(() => {
-      document.removeEventListener('mousedown', timekeeping)
-    })
+    // onUnmounted(() => {
+    //   document.removeEventListener('mousedown', timekeeping)
+    // })
 
     return {
       zhCN,

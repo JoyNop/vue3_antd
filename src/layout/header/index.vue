@@ -11,9 +11,9 @@
             <template #overlay>
               <a-menu v-if="routeItem.children.length">
                 <template v-for="childItem in routeItem.children">
-                  <a-menu-item v-if="!childItem.meta.hidden" :key="childItem.name">
+                  <a-menu-item v-if="!childItem.meta?.hidden" :key="childItem.name">
                     <router-link :to="{ name: childItem.name }">
-                      {{ childItem.meta.title }}
+                      {{ childItem.meta?.title }}
                     </router-link>
                   </a-menu-item>
                 </template>
@@ -80,6 +80,7 @@ export default defineComponent({
 
     const router = useRouter()
     const route = useRoute()
+
     console.log(route.matched)
     console.log(router.getRoutes(), 'currentRoute')
 
@@ -129,28 +130,28 @@ export default defineComponent({
 
     // 图标列表
     const iconList = [
-      {
-        icon: 'SearchOutlined',
-        tips: '搜索'
-      },
-      {
-        icon: 'GithubOutlined',
-        tips: 'github',
-        eventObject: {
-          click: () => window.open('https://github.com/buqiyuan/vue3-antd-admin')
-        }
-      },
+      // {
+      //   icon: 'SearchOutlined',
+      //   tips: '搜索'
+      // },
+      // {
+      //   icon: 'GithubOutlined',
+      //   tips: 'github',
+      //   eventObject: {
+      //     click: () => window.open('https://github.com/joynop')
+      //   }
+      // },
       {
         icon: 'SettingOutlined',
         tips: '网站设置'
-      },
-      {
-        icon: 'LockOutlined',
-        tips: '锁屏',
-        eventObject: {
-          click: () => store.commit('lockscreen/setLock', true)
-        }
       }
+      // {
+      //   icon: 'LockOutlined',
+      //   tips: '锁屏',
+      //   eventObject: {
+      //     click: () => store.commit('lockscreen/setLock', true)
+      //   }
+      // }
     ]
 
     return {
