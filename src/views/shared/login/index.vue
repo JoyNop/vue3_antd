@@ -3,11 +3,11 @@
     <div class="login-logo">
       <svg-icon icon-class="logo" />
       <!--      <img src="~@/assets/images/logo.png" alt="">-->
-      <h1>Antd Admin</h1>
+      <h1>Admin</h1>
     </div>
     <a-form layout="horizontal" :model="formInline" @submit.prevent="handleSubmit">
       <a-form-item>
-        <a-input v-model:value="formInline.username" size="large" placeholder="admin">
+        <a-input v-model:value="formInline.username" size="large" placeholder="15610107990">
           <template #prefix><user-outlined type="user" /></template>
         </a-input>
       </a-form-item>
@@ -50,8 +50,8 @@ export default defineComponent({
     const state = reactive({
       loading: false,
       formInline: {
-        username: '',
-        password: ''
+        username: '15610107990',
+        password: '123456'
       }
     })
 
@@ -76,7 +76,7 @@ export default defineComponent({
         state.loading = false
         message.destroy()
       })
-      if (code == 0) {
+      if (code === 200) {
         const toPath = decodeURIComponent((route.query?.redirect || '/') as string)
         message.success('登录成功！')
         router.replace(toPath).then((_) => {

@@ -1,10 +1,18 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-05 11:00:27
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-08 09:45:10
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/api/system/user.ts
+ */
 import http from '@/utils/http/axios'
 import { BasicResponseModel } from '@/api/BasicResponseModel'
 import { LoginParams, LoginResultModel } from './model/userModel'
 
 enum Api {
-  login = '/admin/login',
-  logout = '/login/logout'
+  login = '/token/login',
+  logout = '/token/logout'
 }
 
 /**

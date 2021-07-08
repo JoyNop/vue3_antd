@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-01 10:46:44
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-06 10:19:58
+ * @LastEditTime: 2021-07-08 09:45:27
  * @Description: file content
  * @FilePath: /vue3_antd/src/router/generator-routers.ts
  */
@@ -23,7 +23,6 @@ const list2tree = (items, parentId = -1, arr = [], pathPrefix = '') => {
   return items
     .filter((item) => item.parentId == parentId)
     .map((item: any) => {
-      debugger
       const { icon, id, name, parentId, sort, keepAlive, meta, url } = item
       let path = ''
       if (/http(s)?:/.test(url)) {
@@ -119,7 +118,6 @@ export const generatorDynamicRouter1 = () => {
   //      后端数据, 根级树数组,  根级 PID
   // listToTree(data, childrenNav, 0)
   // rootRouter.children = childrenNav
-  debugger
   menuNav.push(childrenNav)
   const routeList = list2tree(result)
   console.log(routeList, '根据后端返回的权限路由生成')

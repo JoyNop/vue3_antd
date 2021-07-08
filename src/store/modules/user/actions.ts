@@ -11,16 +11,16 @@ export const actions = {
   async login({ commit }: ActionContext<IUserState, IStore>, userInfo) {
     try {
       const response = await login(userInfo)
-      const { result, code, message } = response
-      if (code == 0) {
-        console.log(result.token)
+      const { data, code, msg } = response
+      if (code === 200) {
+        console.log(data.token)
         const ex = 7 * 24 * 60 * 60 * 1000
-        storage.set(ACCESS_TOKEN, result.token, ex)
-        storage.set(CURRENT_USER, result, ex)
+        storage.set(ACCESS_TOKEN, data.token, ex)
+        storage.set(CURRENT_USER, data, ex)
         storage.set(IS_LOCKSCREEN, false)
-        commit('setToken', result.token)
+        commit('setToken', data.token)
         // todo
-        commit('setUserInfo', result)
+        commit('setUserInfo', data)
         store.commit('lockscreen/setLock', false)
       }
       return Promise.resolve(response)
