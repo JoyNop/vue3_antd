@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-01 10:46:44
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 09:45:27
+ * @LastEditTime: 2021-07-08 10:55:07
  * @Description: file content
  * @FilePath: /vue3_antd/src/router/generator-routers.ts
  */
@@ -128,7 +128,7 @@ export const generatorDynamicRouter1 = () => {
     }
   })
   const layout = routes.find((item) => item.name == 'Layout')!
-  layout.children = [...routeList]
+  layout.children = [...common]
   // layout.children = [...common, ...routeList]
 
   // const routes = [...common,...routeList]
