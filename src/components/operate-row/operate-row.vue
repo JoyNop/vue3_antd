@@ -43,10 +43,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .actions {
-  float: right;
   display: none;
+  float: right;
+
   > ::v-deep(span) {
     margin-left: 5px;
+
     &:hover {
       color: #40a9ff;
     }

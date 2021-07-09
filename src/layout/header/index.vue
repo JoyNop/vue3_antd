@@ -11,7 +11,7 @@
             <template #overlay>
               <a-menu v-if="routeItem.children.length">
                 <template v-for="childItem in routeItem.children">
-                  <a-menu-item v-if="!childItem.meta?.hidden" :key="childItem.name">
+                  <a-menu-item v-if="!childItem?.meta?.hidden" :key="childItem.name">
                     <router-link :to="{ name: childItem.name }">
                       {{ childItem.meta?.title }}
                     </router-link>
@@ -60,6 +60,7 @@ import { message, Modal } from 'ant-design-vue'
 import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 import { useStore } from '@/store'
 import { TABS_ROUTES } from '@/store/mutation-types'
+import { storage } from '@/utils/Storage'
 
 export default defineComponent({
   name: 'PageHeader',
@@ -80,7 +81,6 @@ export default defineComponent({
 
     const router = useRouter()
     const route = useRoute()
-
     console.log(route.matched)
     console.log(router.getRoutes(), 'currentRoute')
 
@@ -95,7 +95,7 @@ export default defineComponent({
           store.dispatch('user/logout').then((res) => {
             message.success('成功退出登录')
             // 移除标签页
-            localStorage.removeItem(TABS_ROUTES)
+            storage.remove(TABS_ROUTES)
             router
               .replace({
                 name: 'login',
@@ -130,17 +130,10 @@ export default defineComponent({
 
     // 图标列表
     const iconList = [
-      // {
-      //   icon: 'SearchOutlined',
-      //   tips: '搜索'
-      // },
-      // {
-      //   icon: 'GithubOutlined',
-      //   tips: 'github',
-      //   eventObject: {
-      //     click: () => window.open('https://github.com/joynop')
-      //   }
-      // },
+      {
+        icon: 'SearchOutlined',
+        tips: '搜索'
+      },
       {
         icon: 'SettingOutlined',
         tips: '网站设置'

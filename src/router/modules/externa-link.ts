@@ -1,8 +1,8 @@
 /*
  * @Author: HanRui(JoyNop)
- * @Date: 2021-07-01 10:46:44
+ * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-02 09:34:59
+ * @LastEditTime: 2021-07-09 10:53:54
  * @Description: file content
  * @FilePath: /vue3-antd-admin/src/router/modules/externa-link.ts
  */
@@ -10,15 +10,15 @@ import { RouteRecordRaw } from 'vue-router'
 import { RouterTransition } from '@/components/transition'
 
 const routes: Array<RouteRecordRaw> = [
-  // {
-  //   path: 'http://buqiyuan.gitee.io/vite-vue3-lowcode/',
-  //   name: 'http://buqiyuan.gitee.io/vite-vue3-lowcode/',
-  //   component: RouterTransition,
-  //   meta: {
-  //     title: 'H5低代码平台',
-  //     icon: 'icon-externa-link'
-  //   }
-  // }
+  {
+    path: 'http://baidu.com',
+    name: 'http://baidu.com',
+    component: RouterTransition,
+    meta: {
+      title: 'externa-link',
+      icon: 'icon-externa-link'
+    }
+  }
 ]
 
 export default routes

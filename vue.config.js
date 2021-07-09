@@ -21,7 +21,11 @@ module.exports = {
       less: {
         javascriptEnabled: true
       },
-      sass: { additionalData: `@import "@/styles/global.scss";` }
+      sass: {
+        additionalData: `
+        @use 'sass:math';
+        @import "@/styles/global.scss";`
+      }
     }
   },
   chainWebpack: (config) => {
@@ -48,7 +52,7 @@ module.exports = {
       // ])
     }
     config.plugin('html').tap((args) => {
-      args[0].title = 'JoyNop'
+      args[0].title = 'admin-title'
       return args
     })
 
@@ -136,7 +140,6 @@ module.exports = {
     }
   },
   devServer: {
-    disableHostCheck:true,
     proxy: {
       '/api': {
         target: process.env.VUE_APP_API_URL,

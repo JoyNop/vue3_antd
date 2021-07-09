@@ -1,4 +1,3 @@
-import { RouteRecordRaw } from 'vue-router'
 import { IAsyncRouteState } from './state'
 
 export const mutations = {

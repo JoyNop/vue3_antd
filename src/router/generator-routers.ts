@@ -1,12 +1,4 @@
-/*
- * @Author: HanRui(JoyNop)
- * @Date: 2021-07-01 10:46:44
- * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 10:55:07
- * @Description: file content
- * @FilePath: /vue3_antd/src/router/generator-routers.ts
- */
-import { adminMenus, getMenu } from '@/api/system/menu'
+import { adminMenus } from '@/api/system/menu'
 import { constantRouterComponents } from './constantRouterComponents'
 import router from '@/router/index'
 import { routes } from '@/router/index'
@@ -110,7 +102,7 @@ export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
 }
 
 export const generatorDynamicRouter1 = () => {
-  const result = getMenu()
+  const result = []
 
   console.log('result', result)
   const menuNav: any = []
@@ -128,6 +120,7 @@ export const generatorDynamicRouter1 = () => {
     }
   })
   const layout = routes.find((item) => item.name == 'Layout')!
+  //只去本地
   layout.children = [...common]
   // layout.children = [...common, ...routeList]
 

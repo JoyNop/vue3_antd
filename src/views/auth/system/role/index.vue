@@ -1,6 +1,4 @@
 <template>
-  <!-- <div>dd</div> -->
-
   <dynamic-table
     ref="tableRef"
     :columns="columns"
@@ -16,6 +14,7 @@
       >
         添加
       </a-button>
+      <a-button type="primary" @click="printTable"> 打印表格 </a-button>
       <a-button
         v-permission="{ action: 'delete' }"
         :disabled="isDisabled"
@@ -44,7 +43,7 @@ export default defineComponent({
     DynamicTable
   },
   setup() {
-    const tableRef = ref<any>(null)
+    const tableRef = ref<InstanceType<typeof DynamicTable>>()
 
     const state = reactive({
       tableLoading: false,
@@ -64,7 +63,7 @@ export default defineComponent({
         content: '您确定要删除所有选中吗？',
         onOk: async () => {
           await delAdminRole(state.rowSelection.selectedRowKeys.toString())
-          tableRef.value.refreshTableData()
+          tableRef.value?.refreshTableData()
           state.rowSelection.selectedRowKeys = []
         }
       })
@@ -83,13 +82,27 @@ export default defineComponent({
             accessIdsList: accessIdsList.toString()
           }
           await postAdminRole(params)
-          tableRef.value.refreshTableData()
+          tableRef.value?.refreshTableData()
         }
       })
       // useCreateModal(OperateModal, {
       //   callback: () => tableRef.value.refreshTableData()
       // })
     }
+
+    const printTable = () => {
+      const dom = tableRef.value?.$el.querySelector('.ant-table-content').cloneNode(true)
+      dom.setAttribute('id', 'printContainer')
+      document.body.append(dom)
+      const printEvent = () => {
+        console.log('After print')
+        dom.remove()
+        window.removeEventListener('afterprint', printEvent)
+      }
+      window.addEventListener('afterprint', printEvent)
+      document.execCommand('print')
+    }
+
     const isDisabled = computed(() => state.rowSelection.selectedRowKeys.length == 0)
 
     return {
@@ -98,9 +111,41 @@ export default defineComponent({
       tableRef,
       isDisabled,
       getAdminRole,
+      printTable,
       addItem,
       deleteItems
     }
   }
 })
 </script>
+
+<style lang="scss">
+@mixin hiddenChild($el) {
+  #{$el}:not(:nth-of-type(n + 2):nth-last-of-type(n + 2)) {
+    display: none !important;
+    width: 0 !important;
+  }
+}
+
+@media print {
+  body > div:not(#printContainer) {
+    display: none;
+  }
+
+  body > #printContainer {
+    table {
+      width: 100%;
+      table-layout: auto;
+    }
+
+    tr {
+      @include hiddenChild(th);
+      @include hiddenChild(td);
+    }
+
+    colgroup {
+      @include hiddenChild(col);
+    }
+  }
+}
+</style>

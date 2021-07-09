@@ -19,7 +19,7 @@ export interface Columns extends ColumnProps {
   dataIndex: string
 }
 
-export type pageOption = Partial<typeof PaginationProps>
+export type pageOption = Partial<PaginationProps>
 
 export interface Props extends Omit<TableProps, 'columns'> {
   columns: Columns[]

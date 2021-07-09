@@ -11,6 +11,7 @@
           :label="formItem.label"
           :name="formItem.field"
           v-bind="{ ...formItem.props, ...validateInfos[formItem.field] }"
+          :type="undefined"
         >
           <component
             :is="getComponent(formItem.type)"
@@ -46,9 +47,10 @@ import {
   PropType
 } from 'vue'
 import { Form, Spin } from 'ant-design-vue'
-import { useForm } from '@ant-design-vue/use'
 import { isString, isFunction, isAsyncFunction } from '@/utils/is'
 import components from './components'
+
+const useForm = Form.useForm
 
 export default defineComponent({
   name: 'DynamicForm',
@@ -72,7 +74,7 @@ export default defineComponent({
   },
   setup(props) {
     // a-form
-    const schemaFormRef = ref<any>(null)
+    const schemaFormRef = ref<InstanceType<typeof Form>>()!
     // 表单实例
     const formInstance = getCurrentInstance()
 

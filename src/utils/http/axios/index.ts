@@ -17,6 +17,7 @@ const isDev = process.env.NODE_ENV === 'development'
 import router from '@/router'
 import store from '@/store'
 import { storage } from '@/utils/Storage'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
 /**
  * @description: 数据处理，方便区分多种处理方式
  */
@@ -36,11 +37,11 @@ const transform: AxiosTransform = {
 
     const reject = Promise.reject
 
-    const { data } = res
+    const { data: resData } = res
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data
+    const { code, data, msg: message } = resData
     // 请求成功
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS
+    const hasSuccess = resData && Reflect.has(resData, 'code')
     // 是否显示提示信息
     if (isShowMessage) {
       if (hasSuccess && (successMessageText || isShowSuccessMessage)) {
@@ -60,14 +61,14 @@ const transform: AxiosTransform = {
       return res.data
     }
 
-    if (!data) {
+    if (!resData) {
       // return '[HTTP] Request has no return value';
-      return reject(data)
+      return reject(resData)
     }
 
     // 接口请求成功，直接返回结果
     if (code === ResultEnum.SUCCESS) {
-      return result
+      return resData
     }
     // 接口请求错误，统一提示错误信息
     if (code === ResultEnum.ERROR) {
@@ -109,7 +110,7 @@ const transform: AxiosTransform = {
       return reject(new Error(message))
     }
 
-    return data
+    return resData
   },
 
   // 请求之前处理config
@@ -158,7 +159,7 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config) => {
     // 请求之前处理config
-    const token = store.state.user.token
+    const token = storage.get(ACCESS_TOKEN)
     if (token) {
       // jwt token
       config.headers.token = token

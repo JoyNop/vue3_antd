@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-05 11:00:27
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-08 16:43:14
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/utils/http/axios/types.ts
+ */
 import { AxiosRequestConfig } from 'axios'
 import { AxiosTransform } from './axiosTransform'
 
@@ -37,6 +45,6 @@ export interface RequestOptions {
 export interface Result<T = any> {
   code: number
   type?: 'success' | 'error' | 'warning'
-  message: string
-  result?: T
+  msg: string
+  data?: T
 }

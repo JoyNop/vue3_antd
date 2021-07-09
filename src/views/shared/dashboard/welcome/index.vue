@@ -1,11 +1,3 @@
-<!--
- * @Author: HanRui(JoyNop)
- * @Date: 2021-07-01 10:46:44
- * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-02 10:50:03
- * @Description: file content
- * @FilePath: /vue3-antd-admin/src/views/shared/dashboard/welcome/index.vue
--->
 <template>
   <div>
     <div class="box">
@@ -29,17 +21,17 @@
 import { defineComponent, ref, watchEffect } from 'vue'
 import { Descriptions, Badge } from 'ant-design-vue'
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue'
-// import HuaweiCharge from '@/components/lockscreen/huawei-charge.vue'
+import HuaweiCharge from '@/components/lockscreen/huawei-charge.vue'
 import BrowserType from '@/utils/browser-type'
 import { useBattery } from '@/hooks/useBattery'
 import { useOnline } from '@/hooks/useOnline'
 import { useStore } from '@/store'
-import performanceMonitor from '@/utils/performanceMonitor'
+// import performanceMonitor from '@/utils/performanceMonitor'
 
 export default defineComponent({
   name: 'Welcome',
   components: {
-    // HuaweiCharge,
+    HuaweiCharge,
     [Badge.name]: Badge,
     [Descriptions.name]: Descriptions,
     [Descriptions.Item.name]: Descriptions.Item,
@@ -71,10 +63,7 @@ export default defineComponent({
       })
     })
 
-    console.log(11)
-
-    console.log(performanceMonitor.getPerformanceData(), 'performanceMonitor')
-    console.log(22)
+    // console.log(performanceMonitor.getPerformanceData(), 'performanceMonitor')
 
     return {
       userInfo,
@@ -90,14 +79,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .box {
+  display: flex;
   width: 100%;
   height: calc(100vh - 280px);
-  display: flex;
   flex-direction: column;
 
   img {
-    flex: 1;
     min-height: 0;
+    flex: 1;
   }
 
   .ant-form {

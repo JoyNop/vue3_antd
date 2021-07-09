@@ -1,10 +1,10 @@
 /*
  * @Author: HanRui(JoyNop)
- * @Date: 2021-07-05 11:00:27
+ * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 10:56:33
+ * @LastEditTime: 2021-07-09 10:54:19
  * @Description: file content
- * @FilePath: /vue3_antd/src/router/constantRouterComponents.ts
+ * @FilePath: /vue3-antd-admin/src/router/constantRouterComponents.ts
  */
 import { RouterView } from 'vue-router'
 import { RouterTransition } from '@/components/transition'

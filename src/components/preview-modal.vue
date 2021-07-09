@@ -78,7 +78,7 @@ export default defineComponent({
   emits: ['update:visible'],
   setup(props, { emit }) {
     // 图片蒙层
-    const imgScaleMask = ref<any>(null)
+    const imgScaleMask = ref<HTMLDivElement>()
 
     let timer
 
@@ -129,8 +129,8 @@ export default defineComponent({
         state.imgStyle.maxHeight = 'none!important'
       }
       clearTimeout(timer)
-      timer = setTimeout(() => imgScaleMask.value.classList.remove('active'), 1400)
-      imgScaleMask.value.classList.add('active')
+      timer = setTimeout(() => imgScaleMask.value?.classList.remove('active'), 1400)
+      imgScaleMask.value?.classList.add('active')
       state.contentStyle = {}
     }
     // 恢复原来的比例

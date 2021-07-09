@@ -50,20 +50,20 @@ export default defineComponent({
   position: relative;
   width: 1em;
   height: 1em;
+  overflow: hidden;
   vertical-align: -0.15em;
   fill: currentColor;
-  overflow: hidden;
 
   &::after {
-    content: '';
     position: absolute;
     top: 0;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    z-index: 1;
     pointer-events: none;
     cursor: pointer;
-    z-index: 1;
+    content: '';
   }
 }
 </style>

@@ -1,10 +1,10 @@
 /*
  * @Author: HanRui(JoyNop)
- * @Date: 2021-07-08 10:57:00
+ * @Date: 2021-07-09 10:54:56
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 11:10:08
+ * @LastEditTime: 2021-07-09 10:56:44
  * @Description: file content
- * @FilePath: /vue3_antd/src/router/modules/biz/auth/system.ts
+ * @FilePath: /vue3-antd-admin/src/router/modules/biz/system.ts
  */
 import { RouteRecordRaw } from 'vue-router'
 import { RouterTransition } from '@/components/transition'
@@ -37,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
         name: `${routeName}-role`,
         meta: {
           title: '角色管理',
-          icon: 'icon-role'
+          icon: 'icon-shouye'
         },
         component: () =>
           import(/* webpackChunkName: "dashboard-welcome" */ '@/views/auth/system/role/index.vue')

@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { routes } from '@/router'
 export default defineComponent({
   name: '404'
 })
@@ -19,11 +18,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .page-container {
+  display: flex;
   width: 100vw;
   height: 100vh;
-  display: flex;
+  background-color: white;
   justify-content: center;
   align-items: center;
-  background-color: white;
 }
 </style>

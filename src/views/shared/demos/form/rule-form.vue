@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { Alert, Card, message } from 'ant-design-vue'
+import { Alert, message } from 'ant-design-vue'
 import { SchemaForm } from '@/components/JSON-schema-form'
 import { getFormSchema } from './form-schema'
 
@@ -28,12 +28,12 @@ import { getFormSchema } from './form-schema'
  */
 export default defineComponent({
   name: 'RuleForm',
-  components: { [Alert.name]: Alert, [Card.name]: Card, SchemaForm },
+  components: { [Alert.name]: Alert, SchemaForm },
   setup() {
-    const dynamicForm = ref<any>(null)
+    const dynamicForm = ref<InstanceType<typeof SchemaForm>>()
 
     // 点击提交
-    const confirm = () => dynamicForm.value.validate().then(() => message.success('验证通过！'))
+    const confirm = () => dynamicForm.value?.validate().then(() => message.success('验证通过！'))
 
     return {
       dynamicForm,

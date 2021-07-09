@@ -25,18 +25,13 @@
       </a-button>
     </template>
     <template #moduleName="{ record }">
-      <span
-        :ref="
-          (el) => {
-            if (el) itemRefs[record.id] = el
-          }
-        "
-      >
+      <span :ref="(el) => el && (itemRefs[record.id] = el)">
         {{ record.moduleName || record.actionName }}
       </span>
     </template>
   </dynamic-table>
 </template>
+
 <script lang="ts">
 import { defineComponent, reactive, toRefs, createVNode, computed, ref } from 'vue'
 import { Modal } from 'ant-design-vue'
@@ -54,7 +49,7 @@ export default defineComponent({
     DynamicTable
   },
   setup() {
-    const tableRef = ref<any>(null)
+    const tableRef = ref<InstanceType<typeof DynamicTable>>()
     const itemRefs = ref({})
 
     const state = reactive({
@@ -76,7 +71,7 @@ export default defineComponent({
         content: '您确定要删除所有选中吗？',
         onOk: async () => {
           await delAdminAccess(state.rowSelection.selectedRowKeys.toString())
-          await tableRef.value.refreshTableData()
+          await tableRef.value?.refreshTableData()
           state.rowSelection.selectedRowKeys = []
         }
       })
@@ -85,7 +80,7 @@ export default defineComponent({
     const addItem = () => {
       useCreateModal(AddModal, {
         callback: () => {
-          tableRef.value.refreshTableData()
+          tableRef.value?.refreshTableData()
         }
       })
     }

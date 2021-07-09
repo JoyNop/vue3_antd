@@ -59,37 +59,40 @@ export default defineComponent({
 <style lang="scss" scoped>
 .split-wrapper {
   display: flex;
-  height: 100%;
   width: 100%;
+  height: 100%;
   background-color: white;
 
   .scalable {
-    overflow: auto;
     position: relative;
-    min-width: 100px;
     width: 240px;
     max-width: 50vw;
+    min-width: 100px;
+    overflow: auto;
+
     .left-content {
       height: 100%;
       padding: 20px;
     }
+
     .separator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: absolute;
       top: 0;
       right: 0;
-      height: 100%;
+      display: flex;
       width: 14px;
-      box-shadow: -4px -2px 4px -5px rgba(0, 0, 0, 0.35), 4px 3px 4px -5px rgba(0, 0, 0, 0.35);
-      background-color: white;
+      height: 100%;
       cursor: col-resize;
+      background-color: white;
+      box-shadow: -4px -2px 4px -5px rgba(0, 0, 0, 0.35), 4px 3px 4px -5px rgba(0, 0, 0, 0.35);
+      align-items: center;
+      justify-content: center;
+
       i {
         width: 1px;
         height: 14px;
-        background-color: #e9e9e9;
         margin: 0 1px;
+        background-color: #e9e9e9;
       }
     }
   }

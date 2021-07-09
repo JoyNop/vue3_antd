@@ -1,13 +1,13 @@
 <!--
  * @Author: HanRui(JoyNop)
- * @Date: 2021-07-01 10:46:44
+ * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-05 10:23:23
+ * @LastEditTime: 2021-07-09 10:13:05
  * @Description: file content
  * @FilePath: /vue3-antd-admin/src/App.vue
 -->
 <template>
-  <config-provider v-show="!isLock" :locale="zhCN">
+  <config-provider :locale="zhCN">
     <router-view v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
@@ -18,21 +18,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, onUnmounted } from 'vue'
+import { defineComponent } from 'vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import { ConfigProvider } from 'ant-design-vue'
-import { LockScreen } from '@/components/lockscreen'
-import { useStore } from '@/store'
-import { useRoute } from 'vue-router'
+// import { LockScreen } from '@/components/lockscreen'
+// import { useStore } from '@/store'
+// import { useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'App',
-  components: { ConfigProvider, LockScreen },
+  components: { ConfigProvider },
   setup() {
-    const route = useRoute()
-    const store = useStore()
-    const isLock = computed(() => store.state.lockscreen.isLock)
-    const lockTime = computed(() => store.state.lockscreen.lockTime)
+    // const route = useRoute()
+    // const store = useStore()
+    // const isLock = computed(() => store.state.lockscreen.isLock)
+    // const lockTime = computed(() => store.state.lockscreen.lockTime)
 
     // let timer
 
@@ -64,8 +64,8 @@ export default defineComponent({
     // })
 
     return {
-      zhCN,
-      isLock
+      zhCN
+      // isLock
     }
   }
 })

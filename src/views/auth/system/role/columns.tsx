@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-08 15:25:14
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-09 11:06:49
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/views/auth/system/role/columns.tsx
+ */
 import { delAdminRole, patchAdminRole } from '@/api/system/role'
 import { formatDate } from '@/utils/common'
 
@@ -7,31 +15,19 @@ import { getFormSchema } from './form-schema'
 export const columns: TableColumn[] = [
   // 角色列表
   {
-    title: '角色名称',
-    dataIndex: 'title'
+    title: '编码',
+    dataIndex: 'code'
   },
   {
-    title: '描述',
-    dataIndex: 'description'
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createdAt',
+    title: '名称',
+    dataIndex: 'name',
     slots: {
-      customRender: 'createdAt'
+      customRender: 'x-name'
     },
-    slotsType: 'format',
-    slotsFunc: (val) => formatDate(val)
+    slotsType: 'component',
+    slotsFunc: (record) => <a-button>asdfsfs</a-button>
   },
-  {
-    title: '最后更新时间',
-    dataIndex: 'updatedAt',
-    slots: {
-      customRender: 'updatedAt'
-    },
-    slotsType: 'format',
-    slotsFunc: (val) => formatDate(val)
-  },
+
   {
     title: '操作',
     dataIndex: 'action',
@@ -45,8 +41,8 @@ export const columns: TableColumn[] = [
         text: '删除',
         permission: {
           // 权限
-          action: 'delete',
-          effect: 'disabled'
+          // action: 'delete',
+          // effect: 'disabled'
         },
         props: {
           type: 'danger'
@@ -59,8 +55,8 @@ export const columns: TableColumn[] = [
         text: '编辑',
         permission: {
           // 权限
-          action: 'update',
-          effect: 'disabled'
+          // action: 'update',
+          // effect: 'disabled'
         },
         props: {
           type: 'warning'

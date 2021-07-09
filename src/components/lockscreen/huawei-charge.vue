@@ -45,100 +45,18 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .huawei-charge {
-  position: absolute;
-  left: 50vw;
-  bottom: 20vh;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 400px;
-
-  .number {
-    position: absolute;
-    width: 300px;
-    top: 27%;
-    text-align: center;
-    font-size: 32px;
-    z-index: 10;
-    color: #fff;
-  }
-
-  .contrast {
-    filter: contrast(15) hue-rotate(0);
-    width: 300px;
-    height: 400px;
-    background-color: #000;
-    overflow: hidden;
-    animation: hueRotate 10s infinite linear;
-
-    .circle {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      box-sizing: border-box;
-      filter: blur(8px);
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(0);
-        width: 200px;
-        height: 200px;
-        background-color: #00ff6f;
-        border-radius: 42% 38% 62% 49% / 45%;
-        animation: trotate 10s infinite linear;
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: 176px;
-        height: 176px;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        background-color: #000;
-        z-index: 10;
-      }
-    }
-
-    .bubbles {
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 100px;
-      height: 40px;
-      transform: translate(-50%, 0);
-      border-radius: 100px 100px 0 0;
-      background-color: #00ff6f;
-      filter: blur(5px);
-
-      li {
-        position: absolute;
-        border-radius: 50%;
-        background: #00ff6f;
-      }
-    }
-  }
-
-  .charging {
-    text-align: center;
-    font-size: 20px;
-  }
-
   @for $i from 0 through 15 {
     li:nth-child(#{$i}) {
       $width: 15 + random(15) + px;
-      left: 15 + random(70) + px;
+
       top: 50%;
-      transform: translate(-50%, -50%);
+      left: 15 + random(70) + px;
       width: $width;
       height: $width;
-      animation: moveToTop #{random(6) + 3}s ease-in-out -#{random(5000) / 1000}s infinite;
+      transform: translate(-50%, -50%);
+      animation: moveToTop #{random(6) + 3}s ease-in-out -#{math.div(random(5000), 1000)}s infinite;
     }
   }
 
@@ -146,6 +64,7 @@ export default defineComponent({
     50% {
       border-radius: 45% / 42% 38% 58% 49%;
     }
+
     100% {
       transform: translate(-50%, -50%) rotate(720deg);
     }
@@ -155,6 +74,7 @@ export default defineComponent({
     90% {
       opacity: 1;
     }
+
     100% {
       opacity: 0.1;
       transform: translate(-50%, -180px);
@@ -165,6 +85,89 @@ export default defineComponent({
     100% {
       filter: contrast(15) hue-rotate(360deg);
     }
+  }
+
+  position: absolute;
+  bottom: 20vh;
+  left: 50vw;
+  width: 300px;
+  height: 400px;
+  transform: translateX(-50%);
+
+  .number {
+    position: absolute;
+    top: 27%;
+    z-index: 10;
+    width: 300px;
+    font-size: 32px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .contrast {
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+    background-color: #000;
+    filter: contrast(15) hue-rotate(0);
+    animation: hueRotate 10s infinite linear;
+
+    .circle {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      filter: blur(8px);
+      box-sizing: border-box;
+
+      &::after {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        background-color: #00ff6f;
+        border-radius: 42% 38% 62% 49% / 45%;
+        content: '';
+        transform: translate(-50%, -50%) rotate(0);
+        animation: trotate 10s infinite linear;
+      }
+
+      &::before {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        z-index: 10;
+        width: 176px;
+        height: 176px;
+        background-color: #000;
+        border-radius: 50%;
+        content: '';
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .bubbles {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100px;
+      height: 40px;
+      background-color: #00ff6f;
+      border-radius: 100px 100px 0 0;
+      filter: blur(5px);
+      transform: translate(-50%, 0);
+
+      li {
+        position: absolute;
+        background: #00ff6f;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .charging {
+    font-size: 20px;
+    text-align: center;
   }
 }
 </style>

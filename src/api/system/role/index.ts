@@ -1,8 +1,16 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-05 11:00:27
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-08 15:51:00
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/api/system/role/index.ts
+ */
 import http from '@/utils/http/axios'
 import { RequestEnum } from '@/enums/httpEnum'
 
 enum Api {
-  adminRole = '/admin/role',
+  adminRole = '/sys/role/list',
   adminRoleAccess = '/admin/role_access'
 }
 

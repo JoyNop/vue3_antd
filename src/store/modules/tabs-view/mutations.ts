@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-09 10:09:16
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-09 10:38:33
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/store/modules/tabs-view/mutations.ts
+ */
 import { TABS_ROUTES } from '@/store/mutation-types'
 import { ITabsViewState } from './state'
 
@@ -40,6 +48,6 @@ export const mutations = {
   closeAllTabs(state: ITabsViewState) {
     // 关闭全部
     state.tabsList = []
-    localStorage.removeItem(TABS_ROUTES)
+    sessionStorage.removeItem(TABS_ROUTES)
   }
 }

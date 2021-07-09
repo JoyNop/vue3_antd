@@ -4,12 +4,12 @@
     :loading="loading"
     :rowSelection="rowSelection"
     :rowKey="rowKey"
-    size="middle"
+    size="small"
     :data-source="data"
     :pagination="pageOptions"
     bordered
     :customRow="customRow"
-    v-bind="{ ...$props, ...$attrs }"
+    v-bind="$attrs"
     @change="paginationChange"
   >
     <!--  自定义slots start-->
@@ -61,14 +61,6 @@
         >
           <!--        对表格的操作动作start-->
           <template v-for="(action, index) in actions">
-            <template v-if="action.type == 'select'">
-              <!--              下拉选择器-->
-              <a-select :key="index" v-model:value="slotProps.record[action.key]" size="small">
-                <Option v-for="option in action.options" :key="option.value" :value="option.value">
-                  {{ option.label }}
-                </Option>
-              </a-select>
-            </template>
             <!--            编辑按钮-->
             <template v-if="action.type == 'button'">
               <a-button
@@ -161,8 +153,6 @@ export default defineComponent({
     // 开启表格伸缩列
     props.dragColEnable && useDragCol(props.columns)
 
-    console.log(props, 100000000)
-
     const state = reactive({
       expandItemRefs: {},
       customRow: () => ({} as TableProps['customRow']),
@@ -175,21 +165,21 @@ export default defineComponent({
     // 获取表格数据
     const refreshTableData = async (params = {}) => {
       params = {
-        pageNumber: pageOptions.value.current,
+        currPage: pageOptions.value.current,
         pageSize: pageOptions.value.pageSize,
         ...props.pageOption,
         ...params
       }
       state.loading = true
-      const { data, pageNumber, pageSize, total } = await props
+      const { data, currPage, pageSize, total } = await props
         .getListFunc(params)
         .finally(() => (state.loading = false))
       Object.assign(pageOptions.value, {
-        current: ~~pageNumber,
+        current: ~~currPage,
         pageSize: ~~pageSize,
         total: ~~total
       })
-      state.data = data
+      state.data = data.list
       // 是否可以拖拽行
       props.dragRowEnable && (state.customRow = useDragRow<any>(state.data)!)
     }
@@ -216,7 +206,7 @@ export default defineComponent({
       }
       refreshTableData({
         pageSize: pagination.pageSize,
-        pageNumber: pagination.current,
+        currPage: pagination.current,
         ...props.pageOption,
         ...filters,
         field,

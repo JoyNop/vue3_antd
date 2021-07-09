@@ -1,7 +1,15 @@
-import { defineComponent, ref } from 'vue'
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-09 10:09:16
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-09 10:24:01
+ * @Description: file content
+ * @FilePath: /vue3-antd-admin/src/layout/footer/index.tsx
+ */
+import { defineComponent } from 'vue'
 
 import { Layout } from 'ant-design-vue'
-import { GithubOutlined, CopyrightOutlined } from '@ant-design/icons-vue'
+import { CopyrightOutlined } from '@ant-design/icons-vue'
 import styles from './index.module.scss'
 
 const { Footer: ALayoutFooter } = Layout
@@ -17,18 +25,11 @@ export default defineComponent({
             <a href="https://github.com/vuejs/vue-next" target="_blank">
               vue 3.0
             </a>
-            <a href="https://github.com/buqiyuan" target="_blank">
-              <GithubOutlined />
-            </a>
-            <a href="https://github.com/vueComponent/ant-design-vue" target="_blank">
-              {' '}
-              ant-design-vue 2.0
-            </a>
           </div>
           <div class={styles.copyright}>
-            Copyright <CopyrightOutlined /> 2020{' '}
-            <a href="https://buqiyuan.gitee.io" target="_blank">
-              buqiyuan.gitee.io
+            Copyright <CopyrightOutlined /> 2021{' '}
+            <a href="https://www.joynop.com" target="_blank">
+              joynop
             </a>
           </div>
         </a-layout-footer>

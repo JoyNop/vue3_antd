@@ -21,7 +21,7 @@ export const actions = {
         commit('setToken', data.token)
         // todo
         commit('setUserInfo', data)
-        store.commit('lockscreen/setLock', false)
+        // store.commit('lockscreen/setLock', false)
       }
       return Promise.resolve(response)
     } catch (e) {
