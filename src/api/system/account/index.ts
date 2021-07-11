@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-05 11:00:27
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-11 16:36:21
+ * @LastEditTime: 2021-07-11 17:50:59
  * @Description: file content
  * @FilePath: /vue3_antd/src/api/system/account/index.ts
  */
@@ -51,11 +51,11 @@ export function delAdminAccount(id: string) {
  * 修改账号
  * @param params
  */
-export function patchAdminAccount(id, params) {
+export function putAdminAccount(params) {
   return http.request(
     {
-      url: [Api.adminAccount, id].join('/'),
-      method: RequestEnum.PATCH,
+      url: `/sys/user/info`,
+      method: RequestEnum.PUT,
       params
     },
     {

@@ -220,7 +220,6 @@ export default defineComponent({
     // 操作事件
     const actionEvent = async (record, func, actionType = '') => {
       console.log('actionEvent', record, func)
-
       // 将refreshTableData放入宏任务中,等待当前微任务拿到结果进行判断操作，再请求表格数据
       await func({ record, props }, () => setTimeout(() => refreshTableData()))
 

@@ -2,11 +2,11 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-11 16:16:53
+ * @LastEditTime: 2021-07-11 17:51:10
  * @Description: file content
  * @FilePath: /vue3_antd/src/views/auth/system/account/columns.ts
  */
-import { delAdminAccount, patchAdminAccount } from '@/api/system/account'
+import { delAdminAccount, putAdminAccount } from '@/api/system/account'
 import { formatDate } from '@/utils/common'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
@@ -104,31 +104,39 @@ export const columns: TableColumn[] = [
       {
         type: 'button', // 控制类型，默认为a,可选： select | button | text
         text: '编辑',
-        // permission: {
-        //   // 权限
-        //   action: 'update',
-        //   effect: 'disabled'
-        // },
+        permission: {
+          // 权限
+          // action: 'update',
+          // effect: 'disabled'
+        },
         props: {
           type: 'warning'
         },
-        func: ({ record }, refreshTableData) =>
-          useFormModal({
-            title: '编辑账号',
-            fields: { ...record, roles: record?.roles.map((item) => item.id) },
-            hiddenFields: ['password'],
+        func: ({ record }, refreshTableData) => {
+          console.log(getFormSchema())
+
+          return useFormModal({
+            title: '编辑角色',
+            fields: record,
+            // hiddenFields: ['password'],
             formSchema: getFormSchema(),
             handleOk: async (modelRef, state) => {
-              const { username, password, roles } = modelRef
+              const { gender, id, password, phone, roleId, username } = modelRef
+
+              console.log(modelRef, '4444')
 
               const params = {
-                username,
+                gender,
+                id,
                 password,
-                roles: roles.toString()
+                phone,
+                roleId,
+                username
               }
-              return await patchAdminAccount(record.id, params).then(() => refreshTableData())
+              return await putAdminAccount(params).then(() => refreshTableData())
             }
           })
+        }
       }
     ]
   }
