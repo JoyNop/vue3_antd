@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-05 11:00:27
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-11 11:18:58
+ * @LastEditTime: 2021-07-11 16:18:46
  * @Description: file content
  * @FilePath: /vue3_antd/src/api/system/role/index.ts
  */
@@ -37,6 +37,16 @@ export function getAdminRole(params) {
     url: Api.adminRole,
     method: RequestEnum.GET,
     params
+  })
+}
+
+/**
+ * 获取全部角色列表
+ */
+export function getAllAdminRole() {
+  return http.request({
+    url: `/sys/role/list/all`,
+    method: RequestEnum.GET
   })
 }
 

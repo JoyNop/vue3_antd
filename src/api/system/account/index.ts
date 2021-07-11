@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-05 11:00:27
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-11 16:36:21
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/api/system/account/index.ts
+ */
 import http from '@/utils/http/axios'
 import { RequestEnum } from '@/enums/httpEnum'
 
@@ -12,7 +20,7 @@ enum Api {
 export function getAdminAccount(params) {
   return http.request(
     {
-      url: Api.adminAccount,
+      url: '/sys/user/list',
       method: RequestEnum.GET,
       params
     },
@@ -64,7 +72,7 @@ export function patchAdminAccount(id, params) {
 export function postAdminAccount(params) {
   return http.request(
     {
-      url: Api.adminAccount,
+      url: `/sys/user/`,
       method: RequestEnum.POST,
       params
     },

@@ -2,9 +2,9 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-09 10:13:05
+ * @LastEditTime: 2021-07-11 16:11:43
  * @Description: file content
- * @FilePath: /vue3-antd-admin/src/App.vue
+ * @FilePath: /vue3_antd/src/App.vue
 -->
 <template>
   <config-provider :locale="zhCN">

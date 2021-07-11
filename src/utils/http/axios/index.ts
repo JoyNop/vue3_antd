@@ -37,12 +37,11 @@ const transform: AxiosTransform = {
 
     const reject = Promise.reject
 
-    console.log(res, 'res')
-
     const resData = res.data
 
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
     const { code, data, msg: message } = resData
+
     // 请求成功
     const hasSuccess = resData && Reflect.has(resData, 'code')
     // 是否显示提示信息
@@ -176,7 +175,7 @@ const transform: AxiosTransform = {
   responseInterceptorsCatch: (error: any) => {
     const { response, code, message } = error || {}
     const msg: string =
-      response && response.data && response.data.error ? response.data.error.message : ''
+      response && response.data ? response.statusText + response.data.code + response.data.msg : ''
     const err: string = error.toString()
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {

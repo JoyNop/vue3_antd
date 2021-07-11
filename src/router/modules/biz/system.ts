@@ -2,9 +2,9 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-09 10:54:56
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-09 10:56:44
+ * @LastEditTime: 2021-07-11 14:56:53
  * @Description: file content
- * @FilePath: /vue3-antd-admin/src/router/modules/biz/system.ts
+ * @FilePath: /vue3_antd/src/router/modules/biz/system.ts
  */
 import { RouteRecordRaw } from 'vue-router'
 import { RouterTransition } from '@/components/transition'
@@ -30,7 +30,9 @@ const routes: Array<RouteRecordRaw> = [
           icon: 'icon-shouye'
         },
         component: () =>
-          import(/* webpackChunkName: "dashboard-welcome" */ '@/views/auth/system/access/index.vue')
+          import(
+            /* webpackChunkName: "dashboard-welcome" */ '@/views/auth/system/account/index.vue'
+          )
       },
       {
         path: 'role',

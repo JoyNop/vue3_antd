@@ -1,13 +1,17 @@
+<!--
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-09 10:09:16
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-11 16:34:09
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/views/auth/system/account/index.vue
+-->
 <template>
-  <dynamic-table
-    ref="tableRef"
-    :columns="columns"
-    :get-list-func="getAdminAccount"
-    rowKey="id"
-    :row-selection="rowSelection"
-  >
+  <dynamic-table ref="tableRef" :columns="columns" :get-list-func="getAdminAccount" rowKey="id">
     <template #title>
-      <a-button
+      <a-button type="primary" @click="addItem"> 添加 </a-button>
+
+      <!-- <a-button
         v-permission="{ action: 'create', effect: 'disabled' }"
         type="primary"
         @click="addItem"
@@ -21,7 +25,7 @@
         @click="deleteItems"
       >
         删除
-      </a-button>
+      </a-button> -->
     </template>
   </dynamic-table>
 </template>
@@ -72,12 +76,14 @@ export default defineComponent({
         title: '添加账号',
         formSchema: getFormSchema(),
         handleOk: async (modelRef, state) => {
-          const { username, password, roles } = modelRef
+          const { username, password, phone, roleId, gender } = modelRef
 
           const params = {
             username,
             password,
-            roles: roles.toString()
+            phone,
+            roleId,
+            gender
           }
           await postAdminAccount(params)
           tableRef.value?.refreshTableData()

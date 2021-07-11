@@ -179,7 +179,6 @@ export default defineComponent({
       state.loading = true
 
       const data = await props.getListFunc(queryParams).finally(() => (state.loading = false))
-
       const { list, currPage, pageSize, totalCount } = data
       Object.assign(pageOptions.value, {
         current: ~~currPage,

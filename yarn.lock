@@ -2176,7 +2176,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-ant-design-vue@2.2.1:
+ant-design-vue@^2.2.1:
   version "2.2.1"
   resolved "https://registry.nlark.com/ant-design-vue/download/ant-design-vue-2.2.1.tgz?cache=0&sync_timestamp=1625541316744&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fant-design-vue%2Fdownload%2Fant-design-vue-2.2.1.tgz#263716745a8a92673b4b3ba2d382919e38129212"
   integrity sha1-JjcWdFqKkmc7Szui04KRnjgSkhI=
