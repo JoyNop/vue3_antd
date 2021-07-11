@@ -194,6 +194,30 @@ export default defineComponent({
 
     refreshTableData()
 
+    // 搜索获取表格数据
+    const searchTableData = async (search: string) => {
+      alert(search)
+      const queryParams = {
+        currPage: pageOptions.value.current,
+        pageSize: pageOptions.value.pageSize
+      }
+
+      state.loading = true
+
+      const data = await props.getListFunc(queryParams).finally(() => (state.loading = false))
+
+      const { list, currPage, pageSize, totalCount } = data
+      Object.assign(pageOptions.value, {
+        current: ~~currPage,
+        pageSize: ~~pageSize,
+        total: ~~totalCount
+      })
+
+      state.data = list
+      // 是否可以拖拽行
+      props.dragRowEnable && (state.customRow = useDragRow<any>(state.data)!)
+    }
+
     // 操作事件
     const actionEvent = async (record, func, actionType = '') => {
       console.log('actionEvent', record, func)
@@ -238,6 +262,7 @@ export default defineComponent({
       buttonProps,
       actionEvent,
       refreshTableData,
+      searchTableData,
       paginationChange
     }
   }

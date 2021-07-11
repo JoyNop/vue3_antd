@@ -9,7 +9,14 @@
         添加
       </a-button> -->
       <a-button type="primary" @click="addItem"> 添加 </a-button>
-      <a-button type="primary" @click="printTable"> 打印表格 </a-button>
+      <a-button type="primary" @click="addItem"> 添加 </a-button>
+      <a-input-search
+        v-model:value="searchValue"
+        placeholder="input search text"
+        style="width: 200px"
+        @search="onSearch"
+      />
+      <!-- <a-button type="primary" @click="printTable"> 打印表格 </a-button> -->
       <a-button
         v-permission="{ action: 'delete' }"
         :disabled="isDisabled"
@@ -42,6 +49,7 @@ export default defineComponent({
     const tableRef = ref<InstanceType<typeof DynamicTable>>()
 
     const state = reactive({
+      searchValue: '',
       tableLoading: false,
       rowSelection: {
         onChange: (selectedRowKeys, selectedRows) => {
@@ -104,6 +112,9 @@ export default defineComponent({
 
     const isDisabled = computed(() => state.rowSelection.selectedRowKeys.length == 0)
 
+    const onSearch = () => {
+      tableRef.value?.searchTableData(state.searchValue)
+    }
     return {
       ...toRefs(state),
       columns,
@@ -112,7 +123,8 @@ export default defineComponent({
       getAdminRole,
       printTable,
       addItem,
-      deleteItems
+      deleteItems,
+      onSearch
     }
   }
 })
