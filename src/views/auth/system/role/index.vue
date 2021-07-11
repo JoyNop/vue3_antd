@@ -1,19 +1,14 @@
 <template>
-  <dynamic-table
-    ref="tableRef"
-    :columns="columns"
-    :get-list-func="getAdminRole"
-    rowKey="id"
-    :row-selection="rowSelection"
-  >
+  <dynamic-table ref="tableRef" :columns="columns" :get-list-func="getAdminRole" rowKey="id">
     <template #title>
-      <a-button
+      <!-- <a-button
         v-permission="{ action: 'create', effect: 'disabled' }"
         type="primary"
         @click="addItem"
       >
         添加
-      </a-button>
+      </a-button> -->
+      <a-button type="primary" @click="addItem"> 添加 </a-button>
       <a-button type="primary" @click="printTable"> 打印表格 </a-button>
       <a-button
         v-permission="{ action: 'delete' }"
@@ -36,6 +31,7 @@ import { columns } from './columns'
 import { hasPermission } from '@/utils/permission/hasPermission'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
+import { usePagination } from '@/hooks'
 
 export default defineComponent({
   name: 'SystemRole',
@@ -74,15 +70,18 @@ export default defineComponent({
         title: '添加角色',
         formSchema: getFormSchema(),
         handleOk: async (modelRef, state) => {
-          const { description, title, accessIdsList } = modelRef
+          const { name, permIdList } = modelRef
 
           const params = {
-            description,
-            title,
-            accessIdsList: accessIdsList.toString()
+            name,
+            permIdList: permIdList
+            // accessIdsList: accessIdsList.toString()
           }
           await postAdminRole(params)
-          tableRef.value?.refreshTableData()
+
+          const page = usePagination()
+
+          tableRef.value?.refreshTableData(page)
         }
       })
       // useCreateModal(OperateModal, {

@@ -37,7 +37,10 @@ const transform: AxiosTransform = {
 
     const reject = Promise.reject
 
-    const { data: resData } = res
+    console.log(res, 'res')
+
+    const resData = res.data
+
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
     const { code, data, msg: message } = resData
     // 请求成功
@@ -67,8 +70,8 @@ const transform: AxiosTransform = {
     }
 
     // 接口请求成功，直接返回结果
-    if (code === ResultEnum.SUCCESS) {
-      return resData
+    if (message === ResultEnum.SUCCESS_STR) {
+      return resData.data
     }
     // 接口请求错误，统一提示错误信息
     if (code === ResultEnum.ERROR) {
@@ -146,10 +149,10 @@ const transform: AxiosTransform = {
         config.params = {}
       }
       // 'a[]=b&a[]=c'
-      if (!isParseToJson) {
-        config.params = qs.stringify(config.params, { arrayFormat: 'brackets' })
-        config.data = qs.stringify(config.data, { arrayFormat: 'brackets' })
-      }
+      // if (!isParseToJson) {
+      //   config.params = qs.stringify(config.params, { arrayFormat: 'brackets' })
+      //   config.data = qs.stringify(config.data, { arrayFormat: 'brackets' })
+      // }
     }
     return config
   },
@@ -207,7 +210,7 @@ const Axios = new VAxios({
   // baseURL: globSetting.apiUrl,
   // 接口可能会有通用的地址部分，可以统一抽取出来
   // prefixUrl: prefix,
-  headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
+  // headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
   // 数据处理方式
   transform,
   // 配置项，下面的选项都可以在独立的接口请求中覆盖

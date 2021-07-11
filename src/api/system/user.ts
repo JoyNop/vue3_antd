@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-05 11:00:27
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 09:45:10
+ * @LastEditTime: 2021-07-09 16:40:36
  * @Description: file content
  * @FilePath: /vue3_antd/src/api/system/user.ts
  */
@@ -34,11 +34,15 @@ export function getUserInfo() {
  * @description: 用户登录
  */
 export function login(params: LoginParams) {
+  const formData: any = new FormData()
+  Object.keys(params).forEach((key) => {
+    formData.append(key, params[key])
+  })
   return http.request<BasicResponseModel<LoginResultModel>>(
     {
       url: Api.login,
       method: 'POST',
-      params
+      params: formData
     },
     {
       isTransformRequestResult: false

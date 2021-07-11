@@ -2,7 +2,7 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-05 11:00:27
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-08 15:51:00
+ * @LastEditTime: 2021-07-11 11:18:58
  * @Description: file content
  * @FilePath: /vue3_antd/src/api/system/role/index.ts
  */
@@ -11,16 +11,19 @@ import { RequestEnum } from '@/enums/httpEnum'
 
 enum Api {
   adminRole = '/sys/role/list',
-  adminRoleAccess = '/admin/role_access'
+  adminRoleAccess = '/sys/permission/prod/list',
+  editRole = '/sys/role/',
+  deleteRole = '/sys/role/roleId'
 }
 
 /**
  * 获取角色权限资源列表
  * @param params
  */
+
 export function getAdminRoleAccess(id?: string | number) {
   return http.request({
-    url: [Api.adminRoleAccess, id].join('/'),
+    url: id ? `/sys/role/roleId/${id}/info` : `/sys/permission/prod/list`,
     method: RequestEnum.GET
   })
 }
@@ -44,7 +47,7 @@ export function getAdminRole(params) {
 export function delAdminRole(id: string) {
   return http.request(
     {
-      url: [Api.adminRole, id].join('/'),
+      url: [Api.deleteRole, id].join('/'),
       method: RequestEnum.DELETE
     },
     {
@@ -58,11 +61,11 @@ export function delAdminRole(id: string) {
  * 修改角色
  * @param params
  */
-export function patchAdminRole(id, params) {
+export function putAdminRole(params) {
   return http.request(
     {
-      url: [Api.adminRole, id].join('/'),
-      method: RequestEnum.PATCH,
+      url: Api.editRole,
+      method: RequestEnum.PUT,
       params
     },
     {
@@ -79,7 +82,7 @@ export function patchAdminRole(id, params) {
 export function postAdminRole(params) {
   return http.request(
     {
-      url: Api.adminRole,
+      url: Api.editRole,
       method: RequestEnum.POST,
       params
     },

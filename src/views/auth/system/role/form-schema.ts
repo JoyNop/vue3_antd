@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-09 10:09:16
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-11 11:55:05
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/views/auth/system/role/form-schema.ts
+ */
 import { createVNode } from 'vue'
 import AccessTree from './components/access-tree.vue'
 import { getAdminRoleAccess } from '@/api/system/role'
@@ -19,7 +27,7 @@ export const getFormSchema = (): FormSchema => ({
     {
       type: 'input',
       label: '角色名称',
-      field: 'title',
+      field: 'name',
       value: '',
       props: {
         placeholder: '请输入角色名称'
@@ -31,26 +39,35 @@ export const getFormSchema = (): FormSchema => ({
         }
       ]
     },
-    {
-      type: 'textarea',
-      label: '描述',
-      field: 'description',
-      value: '',
-      props: {
-        placeholder: '角色描述'
-      }
-    },
+    // {
+    //   type: 'textarea',
+    //   label: '描述',
+    //   field: 'description',
+    //   value: '',
+    //   props: {
+    //     placeholder: '角色描述'
+    //   }
+    // },
     {
       type: createVNode(AccessTree),
       label: '资源',
-      field: 'accessIdsList',
+      field: 'permIdList',
       value: [],
       asyncValue: async (currentValue, formInstance) => {
         const { id } = formInstance?.props.fields as any
         // 获取角色列表
+
         const data = await getAdminRoleAccess(id)
         // 设置角色复选框选项
-        return data.map((item) => item.accessId)
+        let arr: any[] = []
+
+        if (id) {
+          arr = data.sysPermissionList
+        } else {
+          arr = []
+        }
+
+        return arr.map((item) => item.id)
       }
     }
   ]

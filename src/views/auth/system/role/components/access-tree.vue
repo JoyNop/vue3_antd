@@ -32,21 +32,21 @@ export default defineComponent({
     const state = reactive({
       treeData: [],
       spinning: false,
-      replaceFields: {
-        key: 'id'
-      }
+      replaceFields: { title: 'name', key: 'id', children: 'childPerms' }
     })
 
     // 列表转树
-    const list2tree = (items, parent = -1) => {
-      return items
-        .filter((item) => item.moduleId == parent)
-        .map((item) => ({
-          ...item,
-          title: item.moduleName || item.actionName,
-          children: list2tree(items, item.id)
-        }))
-    }
+    // const list2tree = (items, parent = 0) => {
+    //   debugger
+    //   items
+    //     // .filter((item) => item.id == parent)
+    //     .map((item) => ({
+    //       ...item,
+    //       title: item.name || item.code,
+    //       children: list2tree(items, item.id)
+    //     }))
+    //   return []
+    // }
 
     // 已勾选的节点
     const checkedKeys = computed({
@@ -58,7 +58,9 @@ export default defineComponent({
       // 获取权限资源列表
       state.spinning = true
       const data = await getAdminRoleAccess().finally(() => (state.spinning = false))
-      state.treeData = list2tree(data)
+
+      // state.treeData = list2tree(data.data)
+      state.treeData = data
     })
 
     // 获取所有父节点的key
@@ -72,10 +74,12 @@ export default defineComponent({
 
     // 获取所有子节点的key
     const getChildrenKeys = (treeNode, arr: number[] = []) => {
-      if (treeNode?.children.length > 0) {
+      console.log(treeNode)
+
+      if (treeNode?.childPerms.length > 0) {
         console.log(treeNode.children, 'children')
-        return treeNode.children.reduce((prev, curr) => {
-          if (curr.children.length > 0) {
+        return treeNode.childPerms.reduce((prev, curr) => {
+          if (curr.childPerms.length > 0) {
             prev.push(...getChildrenKeys(curr, prev), [])
           }
           return prev.concat([curr.id])
@@ -114,6 +118,8 @@ export default defineComponent({
       }
       checkedKeys.value = tempKeys
     }
+
+    console.log(checkedKeys.value, 'checkedKeys')
 
     return {
       ...toRefs(state),

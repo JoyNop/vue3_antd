@@ -1,3 +1,11 @@
+/*
+ * @Author: HanRui(JoyNop)
+ * @Date: 2021-07-09 10:09:16
+ * @LastEditors: HanRui(JoyNop)
+ * @LastEditTime: 2021-07-11 11:26:20
+ * @Description: file content
+ * @FilePath: /vue3_antd/src/enums/httpEnum.ts
+ */
 /**
  * @description: 请求结果集
  */
@@ -5,7 +13,8 @@ export enum ResultEnum {
   SUCCESS = 0,
   ERROR = -1,
   TIMEOUT = 10042,
-  TYPE = 'success'
+  TYPE = 'success',
+  SUCCESS_STR = 'success'
 }
 
 /**

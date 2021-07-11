@@ -2,11 +2,11 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-08 15:25:14
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-09 11:06:49
+ * @LastEditTime: 2021-07-11 11:15:05
  * @Description: file content
- * @FilePath: /vue3-antd-admin/src/views/auth/system/role/columns.tsx
+ * @FilePath: /vue3_antd/src/views/auth/system/role/columns.tsx
  */
-import { delAdminRole, patchAdminRole } from '@/api/system/role'
+import { delAdminRole, putAdminRole } from '@/api/system/role'
 import { formatDate } from '@/utils/common'
 
 import { useFormModal } from '@/hooks/useFormModal'
@@ -20,12 +20,12 @@ export const columns: TableColumn[] = [
   },
   {
     title: '名称',
-    dataIndex: 'name',
-    slots: {
-      customRender: 'x-name'
-    },
-    slotsType: 'component',
-    slotsFunc: (record) => <a-button>asdfsfs</a-button>
+    dataIndex: 'name'
+    // slots: {
+    //   customRender: 'x-name'
+    // },
+    // slotsType: 'component',
+    // slotsFunc: (record) => <a-button>asdfsfs</a-button>
   },
 
   {
@@ -61,22 +61,25 @@ export const columns: TableColumn[] = [
         props: {
           type: 'warning'
         },
-        func: ({ record }, refreshTableData) =>
-          useFormModal({
+        func: ({ record }, refreshTableData) => {
+          console.log(getFormSchema())
+
+          return useFormModal({
             title: '编辑角色',
             fields: record,
             formSchema: getFormSchema(),
             handleOk: async (modelRef, state) => {
-              const { description, title, accessIdsList } = modelRef
+              const { name, permIdList } = modelRef
 
               const params = {
-                description,
-                title,
-                accessIdsList: accessIdsList.toString()
+                name,
+                permIdList: permIdList,
+                id: record.id
               }
-              return await patchAdminRole(record.id, params).then(() => refreshTableData())
+              return await putAdminRole(params).then(() => refreshTableData())
             }
           })
+        }
       }
     ]
   }
