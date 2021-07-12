@@ -2,20 +2,24 @@
  * @Author: HanRui(JoyNop)
  * @Date: 2021-07-09 10:09:16
  * @LastEditors: HanRui(JoyNop)
- * @LastEditTime: 2021-07-11 17:51:10
+ * @LastEditTime: 2021-07-12 09:13:24
  * @Description: file content
- * @FilePath: /vue3_antd/src/views/auth/system/account/columns.ts
+ * @FilePath: /vue3_antd/src/views/auth/system/account/columns.tsx
  */
-import { delAdminAccount, putAdminAccount } from '@/api/system/account'
+import { delAdminAccount, putAdminAccount, changeAdminAccountState } from '@/api/system/account'
 import { formatDate } from '@/utils/common'
 import { useFormModal } from '@/hooks/useFormModal'
 import { getFormSchema } from './form-schema'
+import { ref } from 'vue'
 
+const isOpen = ref(1)
 export const columns: TableColumn[] = [
   // 账号列表
   {
     title: '编号',
-    dataIndex: 'id'
+    dataIndex: 'id',
+    slotsType: 'format',
+    slotsFunc: (id, record) => (record.state === 0 ? `${id}[新]` : id)
   },
   {
     title: '用户名',
@@ -38,18 +42,26 @@ export const columns: TableColumn[] = [
     title: '状态',
     dataIndex: 'state',
     slots: {
-      customRender: 'state'
+      customRender: 'switch'
     },
     slotsType: 'component',
-    slotsFunc: (state) => {
-      switch (state) {
-        case 0:
-          return '待审'
-        case 1:
-          return '正常'
-        case 2:
-          return '禁用'
-      }
+    slotsFunc: (record, refreshTableData) => {
+      return (
+        <a-switch
+          onChange={async (e, x) => {
+            const params = {
+              state: e ? 1 : 2,
+              userId: record.id
+            }
+            isOpen.value = params.state
+            debugger
+            return await changeAdminAccountState(params).then(() => refreshTableData())
+          }}
+          checked-children="启用"
+          un-checked-children="禁用"
+          checked={isOpen.value === 1}
+        />
+      )
     }
   },
   // {
